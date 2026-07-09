@@ -1,50 +1,59 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
+  --ink: #14242b;
+  --ink-soft: #3a4f58;
+  --mist: #eef3f5;
+  --paper: #f7fafb;
+  --surface: #ffffff;
+  --line: #d5e0e4;
+  --teal: #1b6b6e;
+  --teal-deep: #134f52;
+  --teal-soft: #d8ecec;
+  --sand: #b08968;
+  --background: var(--paper);
+  --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-outfit);
-  --font-display: var(--font-syne);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-mist: var(--mist);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-teal: var(--teal);
+  --color-teal-deep: var(--teal-deep);
+  --color-teal-soft: var(--teal-soft);
+  --color-sand: var(--sand);
+  --font-sans: var(--font-source-sans);
+  --font-display: var(--font-fraunces);
 }
 
-.font-syne {
-  font-family: var(--font-syne), var(--font-outfit), sans-serif;
+.font-display {
+  font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), ui-sans-serif, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .motion-hero-media,
-  .motion-hero-content,
-  .motion-hero-cta {
+  .motion-fade-up,
+  .motion-fade-in,
+  .motion-stagger > * {
     animation: none !important;
   }
 }
 
-@keyframes hero-card-in {
+@keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(14px) scale(0.97);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes hero-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(1rem);
+    transform: translateY(1.1rem);
   }
   to {
     opacity: 1;
@@ -52,25 +61,69 @@ body {
   }
 }
 
-@keyframes hero-line-in {
+@keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(0.5rem);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
-.motion-hero-media {
-  animation: hero-card-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+.motion-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.motion-hero-content {
-  animation: hero-fade-up 0.75s ease-out 0.12s both;
+.motion-fade-in {
+  animation: fade-in 0.7s ease-out both;
 }
 
-.motion-hero-cta {
-  animation: hero-line-in 0.7s ease-out 0.35s both;
+.motion-delay-1 {
+  animation-delay: 0.12s;
+}
+
+.motion-delay-2 {
+  animation-delay: 0.24s;
+}
+
+.motion-delay-3 {
+  animation-delay: 0.36s;
+}
+
+.motion-stagger > * {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.motion-stagger > *:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.motion-stagger > *:nth-child(2) {
+  animation-delay: 0.12s;
+}
+.motion-stagger > *:nth-child(3) {
+  animation-delay: 0.19s;
+}
+.motion-stagger > *:nth-child(4) {
+  animation-delay: 0.26s;
+}
+
+.research-card {
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.research-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--teal) 35%, var(--line));
+  box-shadow: 0 12px 28px -18px rgba(20, 36, 43, 0.35);
+}
+
+.site-nav a:focus-visible,
+.lang-switch a:focus-visible,
+.cta:focus-visible,
+.contact-link:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
 }
