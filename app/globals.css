@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #14242b;
-  --ink-soft: #3a4f58;
-  --mist: #eef3f5;
-  --paper: #f7fafb;
+  --void: #07111f;
+  --ink: #0d1b2a;
+  --ink-soft: #4a5d73;
+  --paper: #f4f7fb;
   --surface: #ffffff;
-  --line: #d5e0e4;
-  --teal: #1b6b6e;
-  --teal-deep: #134f52;
-  --teal-soft: #d8ecec;
-  --sand: #b08968;
+  --line: #d5dee9;
+  --signal: #2f6fed;
+  --signal-deep: #1d4ed8;
+  --signal-soft: #e8effc;
+  --orbit: #7dd3fc;
+  --plasma: #c084fc;
   --background: var(--paper);
   --foreground: var(--ink);
 }
@@ -18,22 +19,23 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-void: var(--void);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
-  --color-mist: var(--mist);
   --color-paper: var(--paper);
   --color-surface: var(--surface);
   --color-line: var(--line);
-  --color-teal: var(--teal);
-  --color-teal-deep: var(--teal-deep);
-  --color-teal-soft: var(--teal-soft);
-  --color-sand: var(--sand);
-  --font-sans: var(--font-source-sans);
-  --font-display: var(--font-fraunces);
+  --color-signal: var(--signal);
+  --color-signal-deep: var(--signal-deep);
+  --color-signal-soft: var(--signal-soft);
+  --color-orbit: var(--orbit);
+  --color-plasma: var(--plasma);
+  --font-sans: var(--font-instrument);
+  --font-display: var(--font-space-grotesk);
 }
 
 .font-display {
-  font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
@@ -42,18 +44,61 @@ body {
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
+/* Signature motif: quantum interference bands */
+.interference {
+  background-image: repeating-linear-gradient(
+    112deg,
+    transparent 0,
+    transparent 11px,
+    rgba(125, 211, 252, 0.07) 11px,
+    rgba(125, 211, 252, 0.07) 12px,
+    transparent 12px,
+    transparent 23px,
+    rgba(192, 132, 252, 0.05) 23px,
+    rgba(192, 132, 252, 0.05) 24px
+  );
+}
+
+.interference-soft {
+  background-image: repeating-linear-gradient(
+    112deg,
+    transparent 0,
+    transparent 14px,
+    rgba(47, 111, 237, 0.045) 14px,
+    rgba(47, 111, 237, 0.045) 15px
+  );
+}
+
+.section-rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--signal) 45%, var(--line)),
+    transparent
+  );
+}
+
 @media (prefers-reduced-motion: reduce) {
   .motion-fade-up,
   .motion-fade-in,
-  .motion-stagger > * {
+  .motion-stagger > *,
+  .timeline-dot::after {
     animation: none !important;
+  }
+
+  .research-row,
+  .cta,
+  .site-nav a,
+  .contact-link {
+    transition: none !important;
   }
 }
 
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(1.1rem);
+    transform: translateY(0.85rem);
   }
   to {
     opacity: 1;
@@ -70,60 +115,123 @@ body {
   }
 }
 
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.15);
+  }
+}
+
 .motion-fade-up {
-  animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .motion-fade-in {
-  animation: fade-in 0.7s ease-out both;
+  animation: fade-in 0.65s ease-out both;
 }
 
 .motion-delay-1 {
-  animation-delay: 0.12s;
+  animation-delay: 0.1s;
 }
 
 .motion-delay-2 {
-  animation-delay: 0.24s;
+  animation-delay: 0.2s;
 }
 
 .motion-delay-3 {
-  animation-delay: 0.36s;
+  animation-delay: 0.3s;
 }
 
 .motion-stagger > * {
-  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .motion-stagger > *:nth-child(1) {
-  animation-delay: 0.05s;
+  animation-delay: 0.04s;
 }
 .motion-stagger > *:nth-child(2) {
-  animation-delay: 0.12s;
+  animation-delay: 0.1s;
 }
 .motion-stagger > *:nth-child(3) {
-  animation-delay: 0.19s;
+  animation-delay: 0.16s;
 }
 .motion-stagger > *:nth-child(4) {
-  animation-delay: 0.26s;
+  animation-delay: 0.22s;
 }
 
-.research-card {
+.research-row {
   transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
-.research-card:hover {
-  transform: translateY(-2px);
-  border-color: color-mix(in srgb, var(--teal) 35%, var(--line));
-  box-shadow: 0 12px 28px -18px rgba(20, 36, 43, 0.35);
+.research-row:hover {
+  background-color: color-mix(in srgb, var(--signal-soft) 55%, white);
+  border-color: color-mix(in srgb, var(--signal) 28%, var(--line));
+}
+
+.cta {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.cta:hover {
+  transform: translateY(-1px);
+}
+
+.site-nav a {
+  transition: color 0.2s ease;
+}
+
+.contact-link {
+  transition: color 0.2s ease;
+}
+
+.timeline-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--orbit) 55%, transparent);
+  animation: pulse-soft 3.2s ease-in-out infinite;
 }
 
 .site-nav a:focus-visible,
 .lang-switch a:focus-visible,
 .cta:focus-visible,
-.contact-link:focus-visible {
-  outline: 2px solid var(--teal);
+.contact-link:focus-visible,
+.faq-item summary:focus-visible {
+  outline: 2px solid var(--signal);
   outline-offset: 3px;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.example-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--signal) 25%, var(--line));
+  background: var(--signal-soft);
+  padding: 0.15rem 0.65rem;
+  font-size: 0.65rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--signal-deep);
 }

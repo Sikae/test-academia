@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
-import { Fraunces, Source_Sans_3 } from "next/font/google";
+import { Instrument_Sans, Space_Grotesk } from "next/font/google";
 import { defaultLang, resolveLang, type Lang } from "@/content/portfolio";
 import { getCopy } from "@/content/portfolio";
 import "./globals.css";
 
-const sourceSans = Source_Sans_3({
-  variable: "--font-source-sans",
+const instrumentSans = Instrument_Sans({
+  variable: "--font-instrument",
   subsets: ["latin"],
   display: "swap",
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
   display: "swap",
 });
@@ -54,7 +54,7 @@ export default async function RootLayout({
   return (
     <html
       lang={lang}
-      className={`${sourceSans.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${instrumentSans.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans">{children}</body>
     </html>
